@@ -1,0 +1,34 @@
+Job Title: Data Scientist
+
+Location: Bangalore, India  
+Experience Required: 1–3 years  
+Employment Type: Full-Time
+
+About the Role:
+We are looking for a Data Scientist to join our analytics team. The ideal candidate should have hands-on experience with data analysis, machine learning, and statistical modeling.
+
+Key Responsibilities:
+- Collect, clean, and analyze large datasets from multiple sources.
+- Build predictive and classification models using machine learning techniques.
+- Interpret model output and provide insights to business teams.
+- Work closely with engineering teams to deploy ML models in production.
+- Create dashboards and reports for stakeholders using visualization tools.
+
+Must-Have Skills:
+- Strong programming skills in Python
+- Experience with ML libraries (Scikit-learn, TensorFlow, PyTorch)
+- Knowledge of SQL and data querying
+- Understanding of statistics and data preprocessing
+- Experience with data visualization tools (PowerBI, Tableau, Matplotlib)
+
+Good-to-Have:
+- Experience working with cloud platforms (AWS, GCP, Azure)
+- Familiarity with NLP or Deep Learning
+- Exposure to big data technologies (Spark/Hadoop)
+
+Education:
+- Bachelor's degree in Computer Science, Data Science, Engineering, or related field.
+
+Salary Range:
+₹6–10 LPA
+
