@@ -1,0 +1,18 @@
+DATA SCIENTIST RESUME
+Name: Alex Johnson
+Email: alex.johnson@example.com
+Phone: +91 9876543210
+
+SUMMARY
+Data Scientist with 3+ years of experience in machine learning, data analysis, and predictive modeling.
+
+SKILLS
+Python, SQL, TensorFlow, Scikit-Learn, Statistics, Data Visualization
+
+EXPERIENCE
+Data Scientist – ABC Analytics (2021–Present)
+- Built ML models improving prediction accuracy by 18%
+- Automated data pipelines using Python & SQL
+
+EDUCATION
+B.Tech in Computer Science
