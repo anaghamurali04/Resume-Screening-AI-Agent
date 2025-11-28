@@ -1,0 +1,18 @@
+BUSINESS ANALYST RESUME
+Name: Rohan Mehta
+Email: rohan.mehta@example.com
+Phone: +91 9123456789
+
+SUMMARY
+Business Analyst with strong analytical and reporting skills.
+
+SKILLS
+Excel, Power BI, SQL, Requirements Gathering
+
+EXPERIENCE
+Business Analyst – Insight Corp (2021–Present)
+- Conducted data analysis improving decision-making by 25%
+- Created dashboards for senior management
+
+EDUCATION
+MBA – Business Analytics
