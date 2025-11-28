@@ -1,0 +1,18 @@
+FINANCE ANALYST RESUME
+Name: Dev Patel
+Email: dev.patel@example.com
+Phone: +91 9543216780
+
+SUMMARY
+Finance Analyst with strong accounting & financial modeling skills.
+
+SKILLS
+Excel, Financial Modeling, SAP, Accounting
+
+EXPERIENCE
+Finance Analyst – FinCorp (2021–Present)
+- Created automated financial reports
+- Improved budgeting accuracy
+
+EDUCATION
+B.Com + CFA Level 1
