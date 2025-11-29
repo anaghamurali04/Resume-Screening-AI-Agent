@@ -1,7 +1,7 @@
 # Resume Screening AI Agent
 An AI Streamlit application that evaluates multiple resumes against a job description using **Google Gemini** model. This tool extracts the text from PDFs, analyses candidate fit, assigns a score and ranks the resumes, thereby making shortlisting faster and more accurate.
 ---
-##Features
+## Features
 - Upload **multiple resumes(PDF)**
 - Upload **Job Description(PDF)**
 - Automatic PDF text extraction using PyPDF2
