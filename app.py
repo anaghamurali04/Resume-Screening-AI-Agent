@@ -37,12 +37,12 @@ Score (0-100):
 Strengths:
 Weaknesses:
 Final Recommendation:"""
+    model = genai.GenerativeModel("gemini-1.0-pro")
     try:
-        model = genai.GenerativeModel("gemini-pro")
-        response = model.generate_text(prompt=prompt,max_output_tokens=800)
+        response = model.generate_content(prompt)
         return response.text if response else "No response received."
     except Exception as e:
-        return f"AI Model Error: {str(e)}"
+        return f"AI Model Error: {e}"
 job_description_file = st.file_uploader("Upload Job Description (PDF)", type=["pdf"])
 resume_files = st.file_uploader("Upload Multiple Resumes (PDF)", type=["pdf"], accept_multiple_files=True)
 if st.button("Analyze Resumes"):
