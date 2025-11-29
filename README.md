@@ -21,7 +21,8 @@ An AI Streamlit application that evaluates multiple resumes against a job descri
 5. **Streamlit App** -> Ranks resumes and displays results
 ---
 ## Architecture Diagram
-
+![Architecture Diagram](https://raw.githubusercontent.com/anaghamurali04/Resume-Screening-AI-Agent/blob/main/architecture_diagram.png)
+---
 ## Tech Stack
 - Frontend UI -> Streamlit
 - Language -> Python
