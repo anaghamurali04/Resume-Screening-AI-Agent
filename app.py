@@ -37,7 +37,7 @@ Score (0-100):
 Strengths:
 Weaknesses:
 Final Recommendation:"""
-    model = genai.GenerativeModel("gemini-1.0-pro")
+    model = genai.GenerativeModel("models/text-bison-001")
     try:
         response = model.generate_content(prompt)
         return response.text if response else "No response received."
