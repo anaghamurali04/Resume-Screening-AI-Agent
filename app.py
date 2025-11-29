@@ -1,45 +1,54 @@
 import streamlit as st
 import os
 from sentence_transformers import SentenceTransformer,util
+import numpy as np
 import fitz
 import docx
+from dotenv import load_dotenv
+load_dotenv()
 model=SentenceTransformer('all-MiniLM-L6-v2')
-def read_pdf(file):
-  text=""
+st.set_page_config(page_title="Resume Screening AI Agent",layout="wide")
+st.title("Resume Screening AI Agent")
+st.write("Upload a resume and job description to get an AI-powered compatibility score.")
+def extract_text_from_pdf(file):
   pdf=fitz.open(stream=file.read(),filetype="pdf")
+  text=""
   for page in pdf:
     text+=page.get_text()
   return text
-def read_docx(file):
+def extract_text_from_docx(file):
   doc=docx.Document(file)
-  return "\n".join([p.text for p in doc.paragraphs])
-def read_txt(file):
-    return file.read().decode("utf-8")
-def extract_text(file):
-  if file.type=="application/pdf":
-    return read_pdf(file)
-  elif file.type=="application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-    return read_docx(file)
-  elif file.type=="text/plain":
-    return read_txt(file)
+  return "\n".join([para.text for para in doc.paragraphs])
+def extract_text_from_txt(file):
+  return file.read().decode("utf-8")
+def calculate_match_score(resume_text,jd_text):
+  resume_emb=model.encode(resume_text,convert_to_tensor=True)
+  jd_emb=model.encode(jd_text,convert_to_tensor=True)
+  score=util.cos_sim(resume_emb,jd_emd).item()
+  return round(score*100,2)
+uploaded_file=st.file_uploader("Upload Resume (PDF,DOCX,TXT)",type=["pdf","docx","txt"])
+job_description=st.text_area("Attach Job Description",height=250)
+if st.button("Analyse Resume"):
+  if uploaded_file is None:
+    st.error("Please upload a resume file.")
+  elif job_description.strip()=="":
+    st.error("Please attach a job description.")
   else:
-    return None
-
-st.title("Resume Screening AI Agent")
-st.write("Upload resumes and the job description to get a similarity score.")
-job_desc_file=st.file_uploader("Upload the Job Description (PDF/DOCX/TXT)",type=["pdf","docx","txt"])
-resume_files=st.file_uploader("Upload Resumes ",type=["pdf","docx","txt"],accept_mutliple_files=True)
-if st.button("Run Screening"):
-  if job_desc_file and resume_files:
-    job_desc_text=extract_text(job_desc_file)
-    jd_embedding=model.encode(job_desc_text,convert_to_tensor=True)
-    st.subheader("Results: ")
-    for resume in resume_files:
-      resume_text=extract_text(resume)
-      resume_embedding=model.encode(resume_text,convert_to_tensor=True)
-      similarity=util.cos_sim(jd_embedding,resume_embedding)[0][0].item()
-      score=round(similarity*100,2)
-      st.write(f"### {resume.name}")
-      st.write(f"**Match Score:**{score}%")
-  else:
-    st.error("Please upload both the job description and resumes.")
+    ext=uploaded_file.name.split(".")[-1].lower()
+    if ext=="pdf":
+      resume_text=extract_text_from_pdf(uploaded_file)
+    elif ext=="docx":
+      resume_text=extract_text_from_docx(uploaded_file)
+    elif ext=="txt":
+      resume_text=extract_text_from_txt(uploaded_file)
+    else:
+      st.error("Unsupported filr format.")
+      st.stop()
+    score=calculate_match_score(resume_text,job_description)
+    st.subheader("Feedback")
+    if score>75:
+      st.success("Excellent match! This resume aligns strongly with the job requirements.")
+    elif score>50:
+      st.warning("Moderate match. The resume could be improved to align better with the JD.")
+    else:
+      st.error("Low match. Skills and experience do not align well with job description.")
