@@ -20,6 +20,8 @@ An AI Streamlit application that evaluates multiple resumes against a job descri
    - Recommendation
 5. **Streamlit App** -> Ranks resumes and displays results
 ---
+## Architecture Diagram
+
 ## Tech Stack
 - Frontend UI -> Streamlit
 - Language -> Python
