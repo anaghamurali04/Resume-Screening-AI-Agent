@@ -1,10 +1,10 @@
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 import PyPDF2
 import tempfile
 import os
 import re
-client=genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 st.title("Resume Screening AI Agent")
 st.write("Upload esumes and compare them against a job description.")
 def extract_text_from_pdf(uploaded_file):
@@ -38,7 +38,8 @@ Strengths:
 Weaknesses:
 Final Recommendation:"""
     try:
-        response = client.models.generate_content(model="models/gemini-2.5-flash",contents=prompt)
+        model=genai.GenerativeModel("models/gemini-2.5-flash")
+        response = model.generate_content(contents=prompt)
         return response.text if response else "No response received."
     except Exception as e:
         return f"AI Model Error: {e}"
