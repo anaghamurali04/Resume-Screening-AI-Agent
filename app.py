@@ -38,7 +38,7 @@ Strengths:
 Weaknesses:
 Final Recommendation:"""
     try:
-        response = client.models.generate_content(model="models/gemini-2.5-flash,contents=prompt)
+        response = client.models.generate_content(model="models/gemini-2.5-flash",contents=prompt)
         return response.text if response else "No response received."
     except Exception as e:
         return f"AI Model Error: {e}"
