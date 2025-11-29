@@ -5,9 +5,8 @@ import os
 import re
 from dotenv import load_dotenv
 from openai import OpenAI
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
+OPENAI_API_KEY=st.secrets["OPENAI_API_KEY"]
+client=OpenAI(api_key=OPENAI_API_KEY)
 st.title("Resume Screening AI Agent")
 st.write("Upload multiple resumes and compare them with a job description.")
 
