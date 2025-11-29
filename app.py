@@ -38,7 +38,7 @@ Strengths:
 Weaknesses:
 Final Recommendation:"""
     try:
-        model = genai.GenerativeModel("gemini-1.0-pro")
+        model = genai.GenerativeModel("gemini-pro")
         response = model.generate_content(prompt)
         return response.text if response else "No response received."
     except Exception as e:
