@@ -2,7 +2,7 @@ import streamlit as st
 import os
 from sentence_transformers import SentenceTransformer,util
 import numpy as np
-import fitz
+import fitz 
 import docx
 from dotenv import load_dotenv
 load_dotenv()
