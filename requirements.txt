@@ -5,3 +5,5 @@ sentence-transformers
 numpy
 PyMuPDF
 python-docx
+torch
+scikit-learn
