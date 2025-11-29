@@ -5,8 +5,8 @@ import os
 import re
 from dotenv import load_dotenv
 from openai import OpenAI
-OPENAI_API_KEY=st.secrets["OPENAI_API_KEY"]
-client=OpenAI(api_key=OPENAI_API_KEY)
+load_dotenv()
+client=OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 st.title("Resume Screening AI Agent")
 st.write("Upload multiple resumes and compare them with a job description.")
 
@@ -35,7 +35,7 @@ def extract_score(text):
         return min(int(match.group(1)), 100)
 
     return 0
-job_description = st.text_area("🧾 Enter Job Description", height=200)
+job_description = st.text_area("Enter Job Description", height=200)
 
 uploaded_files = st.file_uploader(
     "Upload Multiple Resumes (PDF or DOCX)",
