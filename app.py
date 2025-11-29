@@ -3,6 +3,7 @@ import google.generativeai as genai
 import PyPDF2
 import tempfile
 import os
+import re
 genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 st.title("Resume Screening AI Agent")
 st.write("Upload esumes and compare them against a job description.")
@@ -13,10 +14,13 @@ def extract_text_from_pdf(uploaded_file):
     reader = PyPDF2.PdfReader(tmp_path)
     text = ""
     for page in reader.pages:
-        page_text = page.extract_text()
-        if page_text:
-            text += page_text
-    return text
+        try:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text
+        except:
+            continue
+    return text.strip()
 def evaluate_resume(resume_text, job_description):
 
     prompt = f"""You are an expert HR evaluator. Analyze the following resume against the job description.
@@ -33,9 +37,12 @@ Score (0-100):
 Strengths:
 Weaknesses:
 Final Recommendation:"""
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(prompt)
-    return response.text
+    try:
+        model = genai.GenerativeModel("gemini-1.5-flash-latest")
+        response = model.generate_content(prompt)
+        return response.text if response else "No response received."
+    except Exception as e:
+        return f"AI Model Error: {str(e)}"
 job_description_file = st.file_uploader("Upload Job Description (PDF)", type=["pdf"])
 resume_files = st.file_uploader("Upload Multiple Resumes (PDF)", type=["pdf"], accept_multiple_files=True)
 if st.button("Analyze Resumes"):
@@ -51,7 +58,6 @@ if st.button("Analyze Resumes"):
             with st.spinner(f"Analyzing {resume.name} ..."):
                 resume_text = extract_text_from_pdf(resume)
                 analysis = evaluate_resume(resume_text, job_text)
-                import re
                 match = re.search(r"(\d{1,3})", analysis)
                 score = int(match.group(1)) if match else 0
                 results.append({"name": resume.name,"score": score,"analysis": analysis})
