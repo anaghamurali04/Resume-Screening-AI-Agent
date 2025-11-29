@@ -39,7 +39,7 @@ Weaknesses:
 Final Recommendation:"""
     try:
         model = genai.GenerativeModel("gemini-pro")
-        response = model.generate_content(prompt)
+        response = model.generate_text(prompt=prompt,max_output_tokens=800)
         return response.text if response else "No response received."
     except Exception as e:
         return f"AI Model Error: {str(e)}"
